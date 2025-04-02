@@ -94,9 +94,8 @@ You focus on creating value for your customers and we'll take care of the time-c
     - cross-platform compatibility
     - Easier to build and test quickly in local environment
 - **Cons:**
-    - Slightly complex CI/CD environment variable and artifact management.
-    - Requires LLM API keys or local LLM setup.
     - Requires some initial setup to use the CLI tool.
+    - Requires building temporary Node environment for target repo
 
 **Alternative: Python CLI tool**
 
@@ -113,4 +112,4 @@ You focus on creating value for your customers and we'll take care of the time-c
 - More robust, human-readable exception handling
 - Introduce a backend system to collect & retain context on git repository changes - maybe a vector database would give us the ability to retain information across multiple repositories, so that a breaking API change has consistent messaging across all related changelogs
 - More customizable CLI flags so developers have more control of the static website building & deployment
-- Better AI Prompting - I notice the results are very inconsistent and sometimes outright unreadable, so this needs some work
+- Better AI Prompting - I notice the results are very inconsistent and sometimes outright unreadable, so this needs some work. The current prompt still hallucinates and invents new information.
