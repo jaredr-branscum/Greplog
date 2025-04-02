@@ -15,7 +15,7 @@ program
     .command('generate')
     .description('Generate a markdown & html file entry in your changelog')
     .option('-v, --version <version>', 'Specify the semantic version of the new CHANGELOG entry (e.g., 1.2.3)', '1.0.0') // Nice-to-have: infer semantic version from git tags
-    .option('-f, --from <commit>', 'Start of commit range (e.g., tag1, commit-hash)', 'HEAD~1') // Default last commit.
+    .option('-f, --from <commit>', 'Start of commit range (e.g., tag1, commit-hash)')
     .option('-t, --to <commit>', 'End of commit range (e.g., tag2, commit-hash)', 'HEAD') // Default to HEAD.
     .option(
         '-o, --output <path>',

@@ -1,4 +1,4 @@
-import simpleGit, { SimpleGit, DefaultLogFields, ListLogLine } from 'simple-git'
+import simpleGit, { SimpleGit, DefaultLogFields, ListLogLine, LogOptions } from 'simple-git'
 import { GenerateOptions } from '@/types/generate-options'
 import path from 'path'
 import { marked } from 'marked'
@@ -34,12 +34,23 @@ async function validateGitRepo(git: SimpleGit) {
     }
 }
 
+// If from flag is empty, then fetch all contents from active branch
+function buildGitLogConfig(to: string, from: string) {
+    let gitLogConfig: LogOptions<string> = { format: '%s' }
+    if (from) {
+        gitLogConfig = { ...gitLogConfig, from, to }
+    }
+
+    return gitLogConfig
+}
+
 /**
  * Ensure directory is a valid git repo and contains commits to produce a changelog entry
  * Using 'any' as simple-git's log output types are incomplete. (technical debt)
  */
 async function getGitCommits(git: SimpleGit, to: string, from: string) {
-    const log: any = await git.log({ from: from, to: to, format: '%s' })
+    const gitConfig = buildGitLogConfig(to, from)
+    const log: any = await git.log(gitConfig)
     if (log.all.length === 0) {
         throw new Error('There are no changes available to create new changelog') // TODO: create custom exception
     }
